@@ -38,8 +38,6 @@ app.use("/url", urlRouter);
 app.use("/user", userRouter);
 
 app.get("/", async (req:any, res: any) => {
-  // res.send("Welcome to the scissors server");
-  console.log(req)
   const cacheKey = 'allUrls'
   const cachedData = cache.get(cacheKey)
   if(cachedData){
