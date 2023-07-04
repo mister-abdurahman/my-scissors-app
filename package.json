@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "a url shortener",
   "main": "server.ts",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon server.ts",
