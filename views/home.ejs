@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scissors</title>
+  </head>
+  <body>
+<div>
+  <nav style="display: flex; justify-content: center; align-items: center">
+    <h1 style="font-size: 50px; text-align: left">✂</h1>
+    <ul style="display: flex; gap: 80px; flex-grow: 1; justify-content: center">
+      <li style="list-style: none">Why Scissors?</li>
+      <li style="list-style: none">Products</li>
+      <li style="list-style: none">Resources</li>
+      <li style="list-style: none">
+        <a href="/user/logout">Log out</a>
+      </li>
+    </ul>
+  </nav>
+  <h1
+    style="
+      text-align: center;
+      font-size: small;
+      font-family: 'Trebuchet MS', sans-serif;
+    "
+  >
+  <% if (user) { %>
+    Welcome <%= user.lastName %>, we cut down long urls to short nice urls just for you 🚀
+  <% } %>
+  </h1>
+
+  <% if(error) { %>
+    <h4> <%= error %> </h4>
+     <% } %>
+  <form
+    action="/url/<%= user.id %>"
+    method="post"
+    style="display: flex; justify-content: center; gap: 8px; margin-top: 70px"
+    ;
+  >
+  <div style="display: flex; flex-direction: column;">
+    <label placeholder="Enter URL" for="initial_url">URL</label>
+    <input
+    type="url"
+    name="initial_url"
+    id="initial_url"
+    class="form-control col mr-2"
+    required
+    />
+  </div>
+    <div style="display: flex; flex-direction: column;">
+      <label placeholder="Enter Custom URL" for="shortened_url">custom url</label>
+      <input
+      type="text"
+      name="shortened_url"
+      id="shortened_url"
+      class="form-control col mr-2"
+      required
+      />
+    </div>
+    <button style="background-color: black;color: white;font-weight: bold;border-radius: 6px;" type="submit">Shorten</button>
+  </form>
+
+  <table
+  style="
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    min-width: 400px;
+  "
+>
+  <thead>
+    <tr
+      style="
+        background-color: #000;
+        color: #fff;
+        text-align: left;
+        font-weight: bold;
+      "
+    >
+      <th style="padding: 12px 15px">Long URL</th>
+      <th style="padding: 12px 15px">Shrinked URL</th>
+      <th style="padding: 12px 15px">Clicks</th>
+      <th style="padding: 12px 15px">Date created</th>
+      <th style="padding: 12px 15px">QR Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (urls.length > 0) { %>
+      <% urls.forEach(url => { %>
+        <tr style="border-bottom: 1px solid #000">
+          <td style="padding: 12px 15px">
+            <a href="<%= url.initial_url %>"><%= url.initial_url %></a>
+          </td>
+          <td style="padding: 12px 15px">
+            <a href="/url/<%= user.id %>/<%= url.shortened_url %>"><%= url.shortened_url %></a>
+          </td>
+          <td style="padding: 12px 15px"><h4><%= url.clicks %></h4></td>
+          <td style="padding: 12px 15px"><h4>
+            <% if (url.createdAt) { %>
+              <%= new Date(url.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) %>
+            <% } else { %>
+              Date data not available
+            <% } %>
+          </h4></td>
+          <td style="padding: 12px 15px"><a href="/url/qrcode/<%= user.id %>/<%= url._id %>" style="background-color: #000;color: white;padding: 8px;text-decoration: none;">Generate QR Code</a>
+          </td>
+        </tr>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="3">Your shortened URLs are displayed here</td>
+      </tr>
+    <% } %>    
+  </tbody>
+</table>
+</div>
+<%- include('partials/footer'); -%>

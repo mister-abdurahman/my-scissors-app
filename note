@@ -1,0 +1,10 @@
+Pages:
+index✅
+signup✅
+login✅
+home (custom url option, qr code option)✅
+URL history (link analytics, history)✅
+
+Rate limiting✅
+Caching
+Error handling

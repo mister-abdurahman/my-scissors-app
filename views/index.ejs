@@ -1,0 +1,91 @@
+<%- include('partials/header'); -%>
+<div>
+  <nav style="display: flex; justify-content: center; align-items: center">
+    <h1 style="font-size: 50px; text-align: left">✂</h1>
+    <ul style="display: flex; gap: 80px; flex-grow: 1; justify-content: center">
+      <li style="list-style: none">Why Scissors?</li>
+      <li style="list-style: none">Products</li>
+      <li style="list-style: none">Resources</li>
+      <li style="list-style: none">
+        <a href="/user/signup">Sign up free</a>
+      </li>
+      <li style="list-style: none">
+        <a href="/user/login">Log in</a>
+      </li>
+    </ul>
+  </nav>
+  <h1
+    style="
+      text-align: center;
+      font-size: small;
+      font-family: 'Trebuchet MS', sans-serif;
+    "
+  >
+    Signup for free to get access to all the great features: <span style="background-color: #000;color: #fff;font-weight: 900;padding: 6px 12px;margin-right: 10px;"> Custom links </span> <span style="background-color: #000;color: #fff;font-weight: 900;padding: 6px 12px;margin-right: 10px;"> Generating QR Code </span> <span style="background-color: #000;color: #fff;font-weight: 900;padding: 6px 12px;margin-right: 10px;"> Link analytics </span> and much more just for you 🚀
+  </h1>
+  <% if(error) { %>
+    <h4> <%= error %> </h4>
+     <% } %>
+  <form
+    action="/url"
+    method="post"
+    style="display: flex; justify-content: center; gap: 8px; margin-top: 70px"
+    ;
+  >
+    <label placeholder="Enter URL" for="initial_url"></label>
+    <input
+      type="url"
+      name="initial_url"
+      id="initial_url"
+      class="form-control col mr-2"
+      required
+    />
+    <button class="btn btn-success" type="submit">Shorten</button>
+  </form>
+
+  <table
+    style="
+      border-collapse: collapse;
+      margin: 25px auto;
+      font-size: 0.9em;
+      min-width: 400px;
+    "
+  >
+    <thead>
+      <tr
+        style="
+          background-color: #000;
+          color: #fff;
+          text-align: left;
+          font-weight: bold;
+        "
+      >
+        <th style="padding: 12px 15px">Long URL</th>
+        <th style="padding: 12px 15px">Shrinked URL</th>
+        <th style="padding: 12px 15px">Clicks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (typeof allURLS !== 'undefined') { %>
+        <% allURLS.forEach(url => { %>
+          <tr style="border-bottom: 1px solid #000">
+            <td style="padding: 12px 15px">
+              <a href="<%= url.initial_url %>"><%= url.initial_url %></a>
+            </td>
+            <td style="padding: 12px 15px">
+              <a href="/unregistered/<%= url._id %>"><%= url.shortened_url %></a>
+            </td>
+            <td style="padding: 12px 15px">
+              <a href=""><%= url.clicks %></a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="3" style="text-align: center">No URLS to display.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include('partials/footer'); -%>

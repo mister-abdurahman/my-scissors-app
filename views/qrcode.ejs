@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Generation</title>
+</head>
+<body>
+  <h1>Your QR Code for "<%= url.shortened_url %>" is:</h1>
+  <% if(error) { %>
+    <h4> <%= error %> </h4>
+     <% } %>
+    
+  <% if(qrCodeDataURL) { %>
+     <img src="<%= qrCodeDataURL %>" alt="QR Code">
+  <% } %>
+</body>
+</html>

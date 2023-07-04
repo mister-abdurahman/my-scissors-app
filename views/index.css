@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.nav-items {
+  display: flex;
+  gap: 80px;
+}
+.nav-items > li {
+  list-style: none;
+}
