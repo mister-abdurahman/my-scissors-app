@@ -1,7 +1,7 @@
-import urlModel from "../models/url.model";
-import userModel from "../models/user.model";
-import qrcode from 'qrcode';
-import NodeCache = require("node-cache");
+const urlModel = require("../models/url.model");
+const userModel = require("../models/user.model");
+const qrcode = require('qrcode');
+const NodeCache = require("node-cache");
 
 type urlData = {
     id: string;
@@ -61,7 +61,7 @@ export async function qrcodeRenderPage(req:any, res:any, next:any) {
    const url = urlData.initial_url
   
     try {
-        qrcode.toDataURL(url, (err, dataURL) => {
+        qrcode.toDataURL(url, (err:any, dataURL:any) => {
           if (err) {
             console.error(err);
             next(err)

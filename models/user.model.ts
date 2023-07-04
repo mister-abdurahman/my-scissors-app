@@ -1,5 +1,6 @@
-import { Model, Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
+const { Model, Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
+
 
 const saltRounds = 10
 
@@ -12,14 +13,14 @@ export interface UserDetails {
   urlId: ArrayConstructor | undefined[]
 }
 
-export type RetrievedUserDetail = UserDetails & UserModel
+// export type RetrievedUserDetail = UserDetails & UserModel
 
-export interface UserModel extends Model<UserDetails> {
-  login(email: string, password: string) : UserDetails
-  comparePassword(password: string) : UserDetails
-}
+// export interface UserModel extends Model<UserDetails> {
+//   login(email: string, password: string) : UserDetails
+//   comparePassword(password: string) : UserDetails
+// }
 
-const userSchema = new Schema<UserDetails, UserModel>(
+const userSchema = new Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -38,11 +39,11 @@ const userSchema = new Schema<UserDetails, UserModel>(
 )
 
 // function is fired before doc is saved to db
-userSchema.pre('save', async function(next){
+userSchema.pre('save', async function(this: any, next:any){
   try {
-    if (!this.isModified('password')) {
-      return next();
-    }
+    // if (!this.isModified('password')) {
+    //   return next();
+    // }
   
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(this.password, salt)
@@ -76,4 +77,4 @@ userSchema.statics.login = async function(email:string, password: string){
   throw Error("Incorrect Email")
 }
 
-export default model<UserDetails, UserModel>('user', userSchema);
+export default model('user', userSchema);

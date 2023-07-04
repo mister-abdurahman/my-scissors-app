@@ -1,5 +1,11 @@
-import express from "express";
-import { loginUser, renderLogInPage, renderSignupPage, signupNewUser } from "../controllers/user.controller";
+const express = require("express");
+const {
+  loginUser,
+  renderLogInPage,
+  renderSignupPage,
+  signupNewUser,
+} = require("../controllers/user.controller");
+
 
 const app = express();
 const userRouter = express.Router();

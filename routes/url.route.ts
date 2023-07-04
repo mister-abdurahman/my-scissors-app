@@ -1,6 +1,13 @@
-import express from "express";
-import { requireAuth } from "../middlewares/authMiddleware";
-import { createURL, createURLForUnregistered, homePage, qrcodeRenderPage, routeToURL } from "../controllers/url.controller";
+const express = require("express");
+const { requireAuth } = require("../middlewares/authMiddleware");
+const {
+  createURL,
+  createURLForUnregistered,
+  homePage,
+  qrcodeRenderPage,
+  routeToURL,
+} = require("../controllers/url.controller");
+
 
 const urlRouter = express.Router();
 

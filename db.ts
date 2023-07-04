@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const mongoose = require("mongoose");
+// const dotenv = require("dotenv");
 dotenv.config();
 
 // const MONGODB_URL = encodeURI(process.env.MONGODB_URL);
@@ -12,7 +12,7 @@ function connectToMongoDB() {
     console.log("Connected to MongoDB successfully");
   });
 
-  mongoose.connection.on("error", (err) => {
+  mongoose.connection.on("error", (err:any) => {
     console.log("Error connecting to MongoDB", err);
   });
 }

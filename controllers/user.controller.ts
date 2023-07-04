@@ -1,6 +1,6 @@
-import userModel from "../models/user.model";
-import urlModel from "../models/url.model";
-import jwt from "jsonwebtoken";
+const userModel = require("../models/user.model");
+const urlModel = require("../models/url.model");
+const jwt = require("jsonwebtoken");
 
 // app.use(cookieParser());
 // require("dotenv").config();

@@ -1,17 +1,18 @@
-import express, { Express } from "express";
-import urlRouter from "./routes/url.route";
-import userRouter from "./routes/user.route";
-import dotenv from "dotenv";
-import urlModel from "./models/url.model";
-import rateLimit from "express-rate-limit";
-import helmet from 'helmet';
-import cookieParser from "cookie-parser";
-import { requireAuth } from "./middlewares/authMiddleware";
-import { noUserRouteToURL } from "./controllers/url.controller";
-import NodeCache = require("node-cache");
+const express = require("express");
+const urlRouter = require("./routes/url.route");
+const userRouter = require("./routes/user.route");
+const dotenv = require("dotenv");
+const urlModel = require("./models/url.model");
+const rateLimit = require("express-rate-limit");
+const helmet = require('helmet');
+const cookieParser = require("cookie-parser");
+const { requireAuth } = require("./middlewares/authMiddleware");
+const { noUserRouteToURL } = require("./controllers/url.controller");
+const NodeCache = require("node-cache");
+
 dotenv.config();
 
-const app: Express = express();
+const app = express();
 const cache = new NodeCache();
 
 // Rate Limiter
@@ -36,7 +37,7 @@ require("./db").connectToMongoDB();
 app.use("/url", urlRouter);
 app.use("/user", userRouter);
 
-app.get("/", async (req, res) => {
+app.get("/", async (req:any, res: any) => {
   // res.send("Welcome to the scissors server");
   
   const cacheKey = 'allUrls'
